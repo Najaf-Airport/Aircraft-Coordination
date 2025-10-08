@@ -8,71 +8,45 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>
-<script src="script.js"></script>
+<script>
+  const servicesRef = db.collection('services');
+  const flightsRef = db.collection('flights');
+
+  window.addEventListener('DOMContentLoaded', ()=>{
+    const servicesList = document.getElementById('servicesList');
+    const flightsList = document.getElementById('flightsList');
+
+    // تحميل الخدمات
+    servicesRef.get().then(snapshot => {
+      snapshot.forEach(doc => {
+        const li = document.createElement('li');
+        li.textContent = doc.data().name;
+        servicesList.appendChild(li);
+      });
+    });
+
+    // تحميل الرحلات
+    flightsRef.get().then(snapshot => {
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const li = document.createElement('li');
+        li.textContent = `${data.flightNum} - ${data.destination} - ${data.arrival} - ${data.departure} - ${data.status}`;
+        flightsList.appendChild(li);
+      });
+    });
+  });
+</script>
 </head>
 <body>
-
 <header>
-    <h1>مطار النجف الأشرف الدولي</h1>
-    <h2>عمليات ساحة الطيران</h2>
-    <h3>شعبة تنسيق الطائرات</h3>
+  <h1>شعبة تنسيق الطائرات - مطار النجف الأشرف</h1>
 </header>
-
-<nav>
-    <a href="#contact">تواصل معنا</a>
-    <a href="#flights">الرحلات</a>
-    <a href="#services">الخدمات</a>
-    <a href="#about">عن الشعبة</a>
-</nav>
-
 <main>
-    <section id="about">
-        <h2>عن الشعبة</h2>
-        <p style="max-width:800px; margin:auto; text-align:center;">
-        تأسست شعبة تنسيق الطائرات لضمان تنظيم حركة الرحلات الجوية داخل مطار النجف الأشرف الدولي. وتشمل مهامها متابعة الرحلات، التنسيق بين الأقسام المختلفة، والإحصائيات اليومية.
-        </p>
-    </section>
+  <h2>الخدمات</h2>
+  <ul id="servicesList"></ul>
 
-    <section id="services">
-        <h2>الخدمات</h2>
-        <ul id="servicesList" style="max-width:600px; margin:auto;"></ul>
-    </section>
-
-    <section id="flights">
-        <h2>جدول حركة الطائرات</h2>
-        <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="ابحث عن رقم الرحلة أو الوجهة...">
-        <table id="flightsTable">
-            <thead>
-            <tr>
-                <th>رقم الرحلة</th>
-                <th>الوجهة</th>
-                <th>موعد الوصول</th>
-                <th>موعد المغادرة</th>
-                <th>الحالة</th>
-            </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </section>
-
-    <section id="contact">
-        <h2>تواصل معنا</h2>
-        <form>
-            <input type="text" placeholder="الاسم" required>
-            <input type="email" placeholder="البريد الإلكتروني" required>
-            <textarea placeholder="الرسالة" rows="5" required></textarea>
-            <button type="submit">إرسال</button>
-        </form>
-        <p style="text-align:center; margin-top:10px;">
-        للاستفسارات العامة: <a href="mailto:najaf.airport.contact@gmail.com">najaf.airport.contact@gmail.com</a><br>
-        للتواصل مع شعبة تنسيق الطائرات: <a href="mailto:najaf.airport.contact@gmail.com">najaf.airport.contact@gmail.com</a>
-        </p>
-    </section>
+  <h2>الرحلات</h2>
+  <ul id="flightsList"></ul>
 </main>
-
-<footer>
-    جميع الحقوق محفوظة © مطار النجف الأشرف الدولي
-</footer>
-
 </body>
 </html>
