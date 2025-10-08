@@ -4,19 +4,25 @@
 const servicesRef = db.collection("services");
 const flightsRef = db.collection("flights");
 
-// Auth: تسجيل الدخول فقط ببريدك
+// --------------- حماية لوحة التحكم -------------------
 auth.onAuthStateChanged((user) => {
   if(user){
-    if(user.email !== "94.m.94.mn@gmail.com"){
-      alert("ليس لديك صلاحية الدخول");
-      window.location.href = "index.html"; // إعادة التوجيه للصفحة الرئيسية
-    } else {
-      loadServices();
-      loadFlights();
+    const allowedEmail = "94.m.94.mn@gmail.com"; // البريد المصرح
+    if(user.email !== allowedEmail){
+      alert("ليس لديك صلاحية الدخول إلى لوحة التحكم.");
+      auth.signOut().then(()=> window.location.href="index.html");
+      return;
     }
+    // مصرح له: حمل البيانات وأظهر المحتوى
+    document.getElementById('adminContent').classList.add('show');
+    loadServices();
+    loadFlights();
   } else {
-    // تسجيل الدخول باستخدام نافذة Google
-    auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider).catch(err => {
+      console.error("فشل تسجيل الدخول:", err);
+      window.location.href="index.html";
+    });
   }
 });
 
@@ -85,4 +91,21 @@ function addFlightAdmin(){
       document.getElementById("status").value="";
     });
   } else alert("املأ جميع الحقول");
+}
+
+// بحث جدول الرحلات
+function searchTable(){
+  const input = document.getElementById("searchInput").value.toUpperCase();
+  const table = document.getElementById("flightsTable");
+  const tr = table.getElementsByTagName("tr");
+  for (let i = 1; i < tr.length; i++) {
+    let tdArr = tr[i].getElementsByTagName("td");
+    let show = false;
+    for(let j=0;j<tdArr.length;j++){
+      if(tdArr[j].innerText.toUpperCase().indexOf(input) > -1){
+        show = true; break;
+      }
+    }
+    tr[i].style.display = show ? "" : "none";
+  }
 }
