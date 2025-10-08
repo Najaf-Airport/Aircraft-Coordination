@@ -1,6 +1,4 @@
 // firebase-config.js
-
-// إعدادات مشروع Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAENB1CxP4gRmqGfi71Fq2y9O6cBzSN13U",
   authDomain: "najafairportsite.firebaseapp.com",
@@ -11,9 +9,6 @@ const firebaseConfig = {
   measurementId: "G-Y7341CEWGT"
 };
 
-// تهيئة Firebase
 firebase.initializeApp(firebaseConfig);
-
-// تعريف الخدمات
 const auth = firebase.auth();
 const db = firebase.firestore();
