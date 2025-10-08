@@ -1,6 +1,4 @@
-// firebase-config.js
-
-// ضع هنا معلومات مشروعك من Firebase
+=== firebase-config.js ===
 const firebaseConfig = {
   apiKey: "AIzaSyAENB1CxP4gRmqGfi71Fq2y9O6cBzSN13U",
   authDomain: "najafairportsite.firebaseapp.com",
@@ -13,5 +11,5 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
 const auth = firebase.auth();
+const db = firebase.firestore();
