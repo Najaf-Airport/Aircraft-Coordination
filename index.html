@@ -30,7 +30,7 @@
       snapshot.forEach(doc => {
         const data = doc.data();
         const li = document.createElement('li');
-        li.textContent = `${data.flightNum} - ${data.destination} - ${data.arrival} - ${data.departure} - ${data.status}`;
+        li.innerHTML = `<strong>${data.flightNum}</strong> — ${data.destination} <br> الوصول: ${data.arrival} | المغادرة: ${data.departure} | الحالة: <em>${data.status}</em>`;
         flightsList.appendChild(li);
       });
     });
@@ -39,14 +39,21 @@
 </head>
 <body>
 <header>
-  <h1>شعبة تنسيق الطائرات - مطار النجف الأشرف</h1>
+  <h1>شعبة تنسيق الطائرات</h1>
+  <p>مطار النجف الأشرف الدولي</p>
 </header>
 <main>
-  <h2>الخدمات</h2>
-  <ul id="servicesList"></ul>
-
-  <h2>الرحلات</h2>
-  <ul id="flightsList"></ul>
+  <section class="section">
+    <h2>الخدمات</h2>
+    <ul id="servicesList"></ul>
+  </section>
+  <section class="section">
+    <h2>الرحلات</h2>
+    <ul id="flightsList"></ul>
+  </section>
 </main>
+<footer>
+  <p>© شعبة تنسيق الطائرات - مطار النجف الأشرف الدولي 2025</p>
+</footer>
 </body>
 </html>
