@@ -5,69 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>لوحة التحكم - شعبة تنسيق الطائرات</title>
 <link rel="stylesheet" href="style.css">
-
-<!-- مكتبات Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
-<!-- ملفات المشروع -->
 <script src="firebase-config.js"></script>
 <script src="script.js"></script>
-
-<style>
-body { font-family: Tahoma, sans-serif; background-color: #f8f9fa; margin:0; padding:0; text-align:center; }
-header { background-color:#004080; color:white; padding:20px; }
-h1{ margin:0; font-size:1.8em; }
-main{ margin:20px auto; padding:20px; max-width:700px; background-color:white; border-radius:15px; box-shadow:0 0 10px rgba(0,0,0,0.1); display:none; }
-main.show{ display:block; }
-input, button{ margin:5px; padding:10px; font-size:1em; }
-button{ background-color:#004080; color:white; border:none; border-radius:5px; cursor:pointer; }
-button:hover{ background-color:#0066cc; }
-#loginSection{ margin-top:50px; }
-</style>
 </head>
 <body>
-
-<header>
-<h1>لوحة التحكم - شعبة تنسيق الطائرات</h1>
-</header>
-
-<div id="loginSection">
-<p>الرجاء تسجيل الدخول للوصول إلى لوحة التحكم.</p>
-<button id="loginButton" onclick="loginWithGoogle()">تسجيل الدخول عبر Google</button>
-</div>
-
+<header><h1>لوحة التحكم - شعبة تنسيق الطائرات</h1></header>
+<div id="loginSection"><p>الرجاء تسجيل الدخول.</p><button onclick="loginWithGoogle()">تسجيل الدخول عبر Google</button></div>
 <main id="adminContent">
 <h2>الخدمات</h2>
 <ul id="servicesListAdmin"></ul>
-<input type="text" id="newService" placeholder="أضف خدمة جديدة">
-<button onclick="addServiceAdmin()">إضافة الخدمة</button>
-
+<input type="text" id="newService" placeholder="أضف خدمة جديدة"><button onclick="addServiceAdmin()">إضافة الخدمة</button>
 <h2>الرحلات</h2>
-<table id="flightsTable" style="width:100%; border-collapse: collapse;">
-  <thead>
-    <tr>
-      <th>رقم الرحلة</th>
-      <th>الوجهة</th>
-      <th>الوصول</th>
-      <th>المغادرة</th>
-      <th>الحالة</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
-
+<table id="flightsTable" style="width:100%; border-collapse: collapse;"><thead><tr><th>رقم الرحلة</th><th>الوجهة</th><th>الوصول</th><th>المغادرة</th><th>الحالة</th></tr></thead><tbody></tbody></table>
 <input type="text" id="flightNum" placeholder="رقم الرحلة">
 <input type="text" id="destination" placeholder="الوجهة">
 <input type="text" id="arrival" placeholder="موعد الوصول">
 <input type="text" id="departure" placeholder="موعد المغادرة">
 <input type="text" id="status" placeholder="الحالة">
 <button onclick="addFlightAdmin()">إضافة الرحلة</button>
-
-<br>
-<button onclick="logout()" style="margin-top:20px;background-color:#cc0000;">تسجيل الخروج</button>
+<br><button onclick="logout()" style="background-color:#cc0000; color:white; margin-top:10px;">تسجيل الخروج</button>
 </main>
-
 </body>
 </html>
